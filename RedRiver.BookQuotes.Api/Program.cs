@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using RedRiver.BookQuotes.Api.Data;
 
 namespace RedRiver.BookQuotes.Api
 {
@@ -12,6 +14,10 @@ namespace RedRiver.BookQuotes.Api
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+
+            // This adds the database context and connects it to the SQL Server database
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 
@@ -32,3 +38,4 @@ namespace RedRiver.BookQuotes.Api
         }
     }
 }
+
