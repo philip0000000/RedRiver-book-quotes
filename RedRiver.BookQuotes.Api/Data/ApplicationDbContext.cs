@@ -5,15 +5,12 @@ namespace RedRiver.BookQuotes.Api.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        /// <summary>
-        /// Database context that manages application data.
-        /// </summary>
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Quote> Quotes { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
-
-        // Table for storing books.
-        public DbSet<Book> Books { get; set; }
     }
 }
