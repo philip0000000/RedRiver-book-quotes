@@ -38,3 +38,4 @@ namespace RedRiver.BookQuotes.Api
         }
     }
 }
+
