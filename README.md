@@ -28,4 +28,17 @@ My Quotes page:
  - The user should be able to add, delete, and edit quotes.
  - There should be a navigation menu that allows switching between the books view and the quotes view.
 
+## API Endpoints
+
+### POST /auth/register  
+Registers a new user account.
+Body:
+{
+  "username": "string",
+  "password": "string"
+}
+Responses:
+- 201 Created
+- 400 Username already taken
+
 
