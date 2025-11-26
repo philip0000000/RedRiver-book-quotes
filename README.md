@@ -66,3 +66,13 @@ Authenticates the user and returns a JWT token.
   "token": "string"
 }
 ```
+
+### Using the Token
+
+Include the token in each request to protected endpoints:
+
+```json
+{
+  Authorization: Bearer <token>
+}
+```
