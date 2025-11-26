@@ -30,15 +30,15 @@ My Quotes page:
 
 ## API Endpoints
 
-### POST /auth/register  
+### POST /auth/register
+
 Registers a new user account.
-Body:
+
+**Request Body**
+```json
 {
   "username": "string",
   "password": "string"
 }
-Responses:
-- 201 Created
-- 400 Username already taken
 
 
