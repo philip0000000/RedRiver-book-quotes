@@ -45,5 +45,24 @@ Registers a new user account.
   "username": "string",
   "password": "string"
 }
+```
 
+### POST /auth/login
 
+Authenticates the user and returns a JWT token.
+
+#### Request Body
+
+```json
+{
+  "username": "string",
+  "password": "string"
+}
+```
+#### Successful Response
+
+```json
+{
+  "token": "string"
+}
+```
