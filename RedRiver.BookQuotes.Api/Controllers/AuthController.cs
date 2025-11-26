@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using RedRiver.BookQuotes.Api.Data;
 using RedRiver.BookQuotes.Api.Dtos;
 using RedRiver.BookQuotes.Api.Models;
+using RedRiver.BookQuotes.Api.Services;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -16,10 +17,12 @@ namespace RedRiver.BookQuotes.Api.Controllers
     public class AuthController : ControllerBase
     {
         private readonly ApplicationDbContext _db;
+        private readonly ITokenService _tokenService;
 
-        public AuthController(ApplicationDbContext db)
+        public AuthController(ApplicationDbContext db, ITokenService tokenService)
         {
             _db = db;
+            _tokenService = tokenService;
         }
 
         /// <summary>
@@ -52,6 +55,31 @@ namespace RedRiver.BookQuotes.Api.Controllers
             await _db.SaveChangesAsync();
 
             return CreatedAtAction(nameof(Register), new { id = user.Id }, null); // Return a 201 status
+        }
+
+        /// <summary>
+        /// Authenticates the user and issues a JWT upon successful login.
+        /// </summary>
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
+        {
+            // Try to find the user with the given username
+            var user = await _db.Users.FirstOrDefaultAsync(u => u.Username == request.Username);
+            if (user == null)
+                return Unauthorized("Invalid username or password.");
+
+            // Recompute the hash using the stored salt
+            using var hmac = new HMACSHA512(user.PasswordSalt);
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password));
+
+            // Compare hashes byte-by-byte
+            if (!computedHash.SequenceEqual(user.PasswordHash))
+                return Unauthorized("Invalid username or password.");
+
+            // Generate JWT
+            var token = _tokenService.CreateToken(user);
+
+            return Ok(new LoginResponseDto { Token = token }); // Return the token to the client
         }
     }
 }
