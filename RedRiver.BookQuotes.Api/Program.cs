@@ -11,8 +11,15 @@ namespace RedRiver.BookQuotes.Api
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+            builder.Services
+                .AddControllers()
+                .ConfigureApiBehaviorOptions(options =>
+                {
+                    // Ensures ASP.NET Core automatically returns 400 BadRequest
+                    // when model validation fails.
+                    options.SuppressModelStateInvalidFilter = false;
+                });
+
             builder.Services.AddOpenApi();
 
             // This adds the database context and connects it to the SQL Server database
