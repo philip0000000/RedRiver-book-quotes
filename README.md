@@ -72,7 +72,5 @@ Authenticates the user and returns a JWT token.
 Include the token in each request to protected endpoints:
 
 ```json
-{
-  Authorization: Bearer <token>
-}
+Authorization: Bearer <token>
 ```
