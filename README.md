@@ -28,6 +28,11 @@ My Quotes page:
  - The user should be able to add, delete, and edit quotes.
  - There should be a navigation menu that allows switching between the books view and the quotes view.
 
+Bootstrap and Font Awesome
+ - Use Bootstrap to create a responsive and visually appealing layout for the application.
+ - Use Bootstrap classes to style buttons, forms, and other UI components.
+ - Include Font Awesome icons to enhance the visual elements of the application.
+
 ## API Endpoints
 
 ### POST /auth/register
