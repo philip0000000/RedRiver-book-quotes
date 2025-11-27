@@ -15,3 +15,5 @@ namespace RedRiver.BookQuotes.Api.Data
         }
     }
 }
+
+
