@@ -15,6 +15,11 @@ namespace RedRiver.BookQuotes.Api
 
             // Add services to the container.
 
+            // Validate JWT settings early (prevents silent startup with invalid auth)
+            var jwtKey = builder.Configuration["Jwt:Key"];
+            if (string.IsNullOrWhiteSpace(jwtKey))
+                throw new Exception("JWT key is missing from configuration.");
+
             builder.Services
                 .AddControllers()
                 .ConfigureApiBehaviorOptions(options =>
@@ -30,22 +35,27 @@ namespace RedRiver.BookQuotes.Api
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            // Adds authentication support and sets up JWT validation.
+            // Adds authentication and checks JWT tokens
+            // Validates issuer, audience, lifetime, and signature
+            // Uses strict token expiration
             builder.Services
-                .AddAuthentication("Bearer")
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme) // Note: Use the standard scheme name, is safer because it avoids bugs if Microsoft updates the scheme string
                 .AddJwtBearer(options =>
                 {
-                    options.TokenValidationParameters = new()
+                    options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,      // Check who created the token
                         ValidateAudience = true,    // Check who the token is for
                         ValidateLifetime = true,    // Check that the token is not expired
                         ValidateIssuerSigningKey = true,    // Check the signing key
+
                         ValidIssuer = builder.Configuration["Jwt:Issuer"],
                         ValidAudience = builder.Configuration["Jwt:Audience"],
                         IssuerSigningKey = new SymmetricSecurityKey(
                             Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)
-                        )
+                        ),
+
+                        ClockSkew = TimeSpan.Zero   // Strict token expiration
                     };
                 });
 
@@ -62,9 +72,10 @@ namespace RedRiver.BookQuotes.Api
 
             app.UseHttpsRedirection();
 
-            app.UseAuthentication();    // Enables checking the user's token on each request.
-            app.UseAuthorization();
+            // Enables checking the user's token on each request.
+            app.UseAuthentication(); // Note: Must run before authorization!
 
+            app.UseAuthorization();
 
             app.MapControllers();
 
