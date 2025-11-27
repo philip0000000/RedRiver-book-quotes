@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RedRiver.BookQuotes.Api.Data;
 using RedRiver.BookQuotes.Api.Dtos;
@@ -29,6 +30,7 @@ namespace RedRiver.BookQuotes.Api.Controllers
         /// Registers a new user by hashing and salting their password
         /// before saving the credentials to the database.
         /// </summary>
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto request)
         {
@@ -60,6 +62,7 @@ namespace RedRiver.BookQuotes.Api.Controllers
         /// <summary>
         /// Authenticates the user and issues a JWT upon successful login.
         /// </summary>
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
         {
