@@ -10,3 +10,5 @@ namespace RedRiver.BookQuotes.Api.Services
         string CreateToken(User user);
     }
 }
+
+

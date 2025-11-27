@@ -20,3 +20,5 @@ namespace RedRiver.BookQuotes.Api.Models
         public DateTime PublishedDate { get; set; }
     }
 }
+
+

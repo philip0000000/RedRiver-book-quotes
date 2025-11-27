@@ -18,3 +18,5 @@ namespace RedRiver.BookQuotes.Api.Dtos
         public string Password { get; set; } = string.Empty;
     }
 }
+
+
