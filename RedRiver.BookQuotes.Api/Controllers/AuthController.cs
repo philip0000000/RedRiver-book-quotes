@@ -12,9 +12,12 @@ namespace RedRiver.BookQuotes.Api.Controllers
 {
     /// <summary>
     /// Provides endpoints for user authentication and account management.
+    /// All actions here are for login and register, so they do not need a token.
+    /// IMPORTANT: New methods added here must also be open unless they really need auth.
     /// </summary>
     [ApiController]
     [Route("auth")]
+    [AllowAnonymous]
     public class AuthController : ControllerBase
     {
         private readonly ApplicationDbContext _db;
@@ -30,7 +33,6 @@ namespace RedRiver.BookQuotes.Api.Controllers
         /// Registers a new user by hashing and salting their password
         /// before saving the credentials to the database.
         /// </summary>
-        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto request)
         {
@@ -62,7 +64,6 @@ namespace RedRiver.BookQuotes.Api.Controllers
         /// <summary>
         /// Authenticates the user and issues a JWT upon successful login.
         /// </summary>
-        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
         {
