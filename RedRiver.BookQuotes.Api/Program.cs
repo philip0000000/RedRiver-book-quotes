@@ -31,6 +31,18 @@ namespace RedRiver.BookQuotes.Api
 
             builder.Services.AddOpenApi();
 
+            // Add CORS so Angular can call the API
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AngularPolicy", policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200")   // Allow Angular dev server
+                          .AllowAnyHeader()                       // Allow all headers
+                          .AllowAnyMethod()                       // Allow GET, POST, PUT, DELETE
+                          .AllowCredentials();                    // Allow cookies/tokens if needed
+                });
+            });
+
             // This adds the database context and connects it to the SQL Server database
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -72,9 +84,10 @@ namespace RedRiver.BookQuotes.Api
 
             app.UseHttpsRedirection();
 
-            // Enables checking the user's token on each request.
-            app.UseAuthentication(); // Note: Must run before authorization!
+            // Enable CORS before authentication
+            app.UseCors("AngularPolicy"); // Note: Must run before UseAuthentication and UseAuthorization!
 
+            app.UseAuthentication(); // Check JWT tokens // Note: Must run before authorization!
             app.UseAuthorization();
 
             app.MapControllers();
