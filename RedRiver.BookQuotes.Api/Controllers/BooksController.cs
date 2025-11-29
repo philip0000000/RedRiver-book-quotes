@@ -11,7 +11,7 @@ namespace RedRiver.BookQuotes.Api.Controllers
     /// All endpoints require authentication via JWT.
     /// </summary>
     [ApiController]
-    [Route("books")]
+    [Route("api/books")]
     [Authorize]
     public class BooksController : ControllerBase
     {
