@@ -82,7 +82,8 @@ namespace RedRiver.BookQuotes.Api
                 app.MapOpenApi();
             }
 
-            app.UseHttpsRedirection();
+            // Disable HTTPS redirection for local proxy use
+            //app.UseHttpsRedirection();
 
             // Enable CORS before authentication
             app.UseCors("AngularPolicy"); // Note: Must run before UseAuthentication and UseAuthorization!

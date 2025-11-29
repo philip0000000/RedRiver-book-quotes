@@ -16,7 +16,7 @@ namespace RedRiver.BookQuotes.Api.Controllers
     /// IMPORTANT: New methods added here must also be open unless they really need auth.
     /// </summary>
     [ApiController]
-    [Route("auth")]
+    [Route("api/auth")]
     [AllowAnonymous]
     public class AuthController : ControllerBase
     {

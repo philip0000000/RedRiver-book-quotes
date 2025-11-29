@@ -12,7 +12,7 @@ namespace RedRiver.BookQuotes.Api.Controllers
     /// User can only manage own quotes.
     /// </summary>
     [ApiController]
-    [Route("quotes")]
+    [Route("api/quotes")]
     [Authorize]
     public class QuotesController : ControllerBase
     {
