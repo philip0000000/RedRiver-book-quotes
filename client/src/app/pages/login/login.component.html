@@ -1,0 +1,31 @@
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <!-- Controls the size on different screens -->
+  <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+
+    <!-- Page title -->
+    <h2 class="text-center mb-4">Logga in</h2>
+
+    <!-- Login form -->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="card p-4 shadow-sm">
+
+      <div class="mb-3">
+        <label class="form-label">Användarnamn</label>
+        <input formControlName="username" class="form-control" type="text" placeholder="Skriv ditt användarnamn">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Lösenord</label>
+        <input formControlName="password" class="form-control" type="password" placeholder="Skriv ditt lösenord">
+      </div>
+
+      <!-- Login button -->
+      <button class="btn btn-primary w-100" type="submit">Logga in</button>
+
+      <!-- Link to register page -->
+      <div class="text-center mt-3">
+        <a routerLink="/register">Har du inget konto? Registrera dig</a>
+      </div>
+
+    </form>
+  </div>
+</div>
