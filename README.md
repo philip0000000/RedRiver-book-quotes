@@ -33,6 +33,13 @@ Bootstrap and Font Awesome
  - Use Bootstrap classes to style buttons, forms, and other UI components.
  - Include Font Awesome icons to enhance the visual elements of the application.
 
+Responsive Design Testing
+ - Ensure the application's layout and components adapt smoothly to various screen sizes, including desktops, tablets, and mobile devices.
+ - Test the application by resizing the browser window and verify that all elements adjust correctly.
+ - Confirm that navigation menus collapse into a responsive mobile menu on smaller screens.
+ - Verify that form fields, buttons, and other UI elements maintain proper spacing and alignment across different viewports.
+ - Test the application on multiple devices (e.g., smartphones, tablets) and browsers to ensure consistent behavior.
+
 ## API Endpoints
 
 ### POST /auth/register
