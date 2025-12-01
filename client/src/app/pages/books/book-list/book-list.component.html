@@ -1,0 +1,56 @@
+<div class="container mt-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Böcker</h2>
+
+    <a routerLink="/books/add" class="btn btn-success">
+      <fa-icon [icon]="faPlus"></fa-icon> Lägg till bok
+    </a>
+  </div>
+
+  <!-- No books -->
+  <div *ngIf="books.length === 0" class="alert alert-info">
+    Inga böcker ännu. Lägg till en bok för att börja.
+  </div>
+
+  <!-- Books table -->
+  <div *ngIf="books.length > 0" class="table-responsive">
+    <table class="table table-bordered table-striped">
+
+      <thead class="table-light">
+        <tr>
+          <th>Titel</th>
+          <th>Författare</th>
+          <th>Publicerad</th>
+          <th style="width: 150px;">Åtgärder</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let b of books">
+
+          <td>{{ b.title }}</td>
+          <td>{{ b.author }}</td>
+          <td>{{ b.publishedDate | date:'yyyy-MM-dd' }}</td>
+
+          <td>
+            <!-- Edit button, navigates to edit form for this book -->
+            <a routerLink="/books/edit/{{ b.id }}" class="btn btn-primary btn-sm me-2">
+              <fa-icon [icon]="faPen"></fa-icon>
+            </a>
+
+            <!-- Delete button, triggers deleteBook(id) in component -->
+            <button class="btn btn-danger btn-sm" (click)="deleteBook(b.id)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+</div>
+
+
