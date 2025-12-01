@@ -1,0 +1,29 @@
+<div class="container py-4">
+
+  <h2 class="mb-4">Lägg till nytt citat</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="card p-4 shadow-sm">
+
+    <!-- Text field -->
+    <div class="mb-3">
+      <label class="form-label">Citat</label>
+      <textarea formControlName="text"
+                class="form-control"
+                rows="4"
+                placeholder="Skriv ditt citat här..."></textarea>
+    </div>
+
+    <button class="btn btn-success w-100" type="submit">
+      <fa-icon [icon]="faSave" class="me-1"></fa-icon>
+      Spara
+    </button>
+
+    <!-- Back link -->
+    <div class="text-center mt-3">
+      <a routerLink="/quotes">Tillbaka till listan</a>
+    </div>
+
+  </form>
+</div>
+
+
