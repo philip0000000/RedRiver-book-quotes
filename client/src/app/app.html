@@ -5,12 +5,21 @@
     <a class="navbar-brand" routerLink="/books">RedRiver</a>
 
     <!-- Mobile toggle -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <!-- Menu -->
     <div class="collapse navbar-collapse" id="mainNavbar">
+
+      <!-- Left side -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
         <li class="nav-item">
@@ -25,18 +34,21 @@
 
       <!-- Right side -->
       <ul class="navbar-nav ms-auto">
-        <!-- Switch between light and dark UX themes -->
+
+        <!-- Light / Dark Theme Switch -->
         <li class="nav-item me-3">
-          <button class="p-0 bg-transparent border-0 text-light" (click)="toggleTheme()">
+          <button class="btn btn-sm btn-outline-light" (click)="toggleTheme()">
             Växla tema
           </button>
         </li>
 
+        <!-- Logout -->
         <li class="nav-item">
-          <button class="nav-link btn btn-link text-warning p-0" (click)="logout()">
+          <button class="btn btn-sm btn-warning" (click)="logout()">
             Logga ut
           </button>
         </li>
+
       </ul>
 
     </div>

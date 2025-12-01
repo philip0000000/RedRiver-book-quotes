@@ -1,33 +1,35 @@
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-  <!-- Controls the size on different screens -->
-  <div class="col-12 col-sm-8 col-md-6 col-lg-4">
 
-    <!-- Page title -->
-    <h2 class="text-center mb-4">Registrera konto</h2>
+  <div class="row w-100 justify-content-center">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
 
-    <!-- Register form -->
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="card p-4 shadow-sm">
+      <!-- Page title -->
+      <h2 class="text-center mb-4">Registrera konto</h2>
 
-      <div class="mb-3">
-        <label class="form-label">Användarnamn</label>
-        <input formControlName="username" class="form-control" type="text" placeholder="Välj användarnamn">
-      </div>
+      <!-- Register form -->
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="card p-4 shadow-sm">
 
-      <div class="mb-3">
-        <label class="form-label">Lösenord</label>
-        <input formControlName="password" class="form-control" type="password" placeholder="Välj lösenord">
-      </div>
+        <div class="mb-3">
+          <label class="form-label">Användarnamn</label>
+          <input formControlName="username" class="form-control" type="text" placeholder="Välj användarnamn">
+        </div>
 
-      <!-- Submit button -->
-      <button class="btn btn-success w-100" type="submit">Skapa konto</button>
+        <div class="mb-3">
+          <label class="form-label">Lösenord</label>
+          <input formControlName="password" class="form-control" type="password" placeholder="Välj lösenord">
+        </div>
 
-      <!-- Link to login page -->
-      <div class="text-center mt-3">
-        <a routerLink="/login">Har du redan ett konto? Logga in</a>
-      </div>
+        <!-- Submit button -->
+        <button class="btn btn-success w-100" type="submit">Skapa konto</button>
 
-    </form>
+        <!-- Link to login page -->
+        <div class="text-center mt-3">
+          <a routerLink="/login">Har du redan ett konto? Logga in</a>
+        </div>
+
+      </form>
+
+    </div>
   </div>
+
 </div>
-
-
