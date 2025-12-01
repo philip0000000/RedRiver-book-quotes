@@ -11,7 +11,7 @@ export class AuthService {
   private apiUrl = 'http://localhost:5062/api/auth';
   // Change later when deploying
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // Sends login request to the API and returns a token.
   login(data: { username: string; password: string }): Observable<any> {
@@ -37,9 +37,16 @@ export class AuthService {
     return localStorage.getItem('auth_token');
   }
 
-  // Removes token from local storage.
+  // Check if user is logged in
+  isLoggedIn(): boolean {
+    // Token exists = logged in
+    return !!this.getToken();
+  }
+
+  // Remove token to log out
   logout(): void {
-    // Clear the user token to log out
     localStorage.removeItem('auth_token');
   }
 }
+
+

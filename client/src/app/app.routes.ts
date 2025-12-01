@@ -7,27 +7,60 @@ import { BookEditComponent } from './pages/books/book-edit/book-edit.component';
 import { QuotesListComponent } from './pages/quotes/quotes-list/quotes-list.component';
 import { QuoteAddComponent } from './pages/quotes/quote-add/quote-add.component';
 import { QuoteEditComponent } from './pages/quotes/quote-edit/quote-edit.component';
+import { AuthGuard } from './guards/auth.guard';
+import { inject } from '@angular/core';
+import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 export const routes: Routes = [
-  // Login
-  { path: 'login', component: LoginComponent },
+  // Redirect root to login page
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
 
-  // Register
-  { path: 'register', component: RegisterComponent },
+  // Public routes
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [(route, state) => {   // Stops logged-in users from opening this page
+      const auth = inject(AuthService);
+      const router = inject(Router);
 
+      if (auth.isLoggedIn()) {
+        router.navigate(['/books']);
+        return false;
+      }
+
+      return true;
+    }]
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,       // Stops logged-in users from opening this page
+    canActivate: [(route, state) => {
+      const auth = inject(AuthService);
+      const router = inject(Router);
+
+      if (auth.isLoggedIn()) {
+        router.navigate(['/books']);
+        return false;
+      }
+
+      return true;
+    }]
+  },
+
+  // ===== Protected routes =====
   // Books
-  { path: 'books', component: BookListComponent },
-  { path: 'books/add', component: BookAddComponent },
-  { path: 'books/edit/:id', component: BookEditComponent },
+  { path: 'books', component: BookListComponent, canActivate: [AuthGuard] },
+  { path: 'books/add', component: BookAddComponent, canActivate: [AuthGuard] },
+  { path: 'books/edit/:id', component: BookEditComponent, canActivate: [AuthGuard] },
 
   // Quotes
-  { path: 'quotes', component: QuotesListComponent },
-  { path: 'quotes/add', component: QuoteAddComponent },
-  { path: 'quotes/edit/:id', component: QuoteEditComponent },
+  { path: 'quotes', component: QuotesListComponent, canActivate: [AuthGuard] },
+  { path: 'quotes/add', component: QuoteAddComponent, canActivate: [AuthGuard] },
+  { path: 'quotes/edit/:id', component: QuoteEditComponent, canActivate: [AuthGuard] },
 
-  // Default route
-  { path: '', redirectTo: 'books', pathMatch: 'full' },
-
-  // Wildcard
-  { path: '**', redirectTo: 'books' }
+  // Fallback route
+  { path: '**', redirectTo: 'login' }
 ];
+
+
