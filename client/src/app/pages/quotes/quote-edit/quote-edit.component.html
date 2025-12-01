@@ -1,0 +1,35 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+
+      <h2 class="mb-4">Redigera citat</h2>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="card p-4 shadow-sm">
+
+        <!-- Text area -->
+        <div class="mb-3">
+          <label class="form-label">Citat</label>
+          <textarea formControlName="text"
+                    class="form-control"
+                    rows="4"
+                    placeholder="Redigera ditt citat..."></textarea>
+        </div>
+
+        <!-- Save button -->
+        <button class="btn btn-primary w-100" type="submit">
+          <fa-icon [icon]="faSave" class="me-1"></fa-icon>
+          Spara ändringar
+        </button>
+
+        <!-- Back link -->
+        <div class="text-center mt-3">
+          <a routerLink="/quotes">Tillbaka till listan</a>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+

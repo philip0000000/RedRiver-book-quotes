@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="auth.isLoggedIn()">
+  <div class="container-fluid">
+
+    <!-- Brand -->
+    <a class="navbar-brand" routerLink="/books">RedRiver</a>
+
+    <!-- Mobile toggle -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+
+      <!-- Left side -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/books">Böcker</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/quotes">Citat</a>
+        </li>
+
+      </ul>
+
+      <!-- Right side -->
+      <ul class="navbar-nav ms-auto">
+
+        <!-- Light / Dark Theme Switch -->
+        <li class="nav-item me-3">
+          <button class="btn btn-sm btn-outline-light" (click)="toggleTheme()">
+            Växla tema
+          </button>
+        </li>
+
+        <!-- Logout -->
+        <li class="nav-item">
+          <button class="btn btn-sm btn-warning" (click)="logout()">
+            Logga ut
+          </button>
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<!-- Page content -->
+<router-outlet></router-outlet>
+
+

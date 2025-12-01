@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+
+      <!-- Page title with icon -->
+      <h2 class="mb-4">
+        <fa-icon [icon]="faSave"></fa-icon> Redigera bok
+      </h2>
+
+      <!-- Edit Book Form -->
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="card p-4 shadow-sm">
+
+        <div class="mb-3">
+          <label class="form-label">Titel</label>
+          <input formControlName="title" class="form-control" type="text" placeholder="Titel" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Författare</label>
+          <input formControlName="author" class="form-control" type="text" placeholder="Författare" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Publiceringsdatum</label>
+          <input formControlName="publishedDate" class="form-control" type="date" />
+        </div>
+
+        <!-- Save Button -->
+        <button class="btn btn-primary w-100" type="submit">
+          <fa-icon [icon]="faSave"></fa-icon> Spara ändringar
+        </button>
+
+        <!-- Back Link -->
+        <div class="text-center mt-3">
+          <a routerLink="/books" class="text-decoration-none">
+            <fa-icon [icon]="faArrowLeft"></fa-icon> Tillbaka
+          </a>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+

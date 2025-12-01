@@ -1,0 +1,44 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+
+      <h2 class="mb-4">
+        <fa-icon [icon]="faPlus"></fa-icon> Lägg till ny bok
+      </h2>
+
+      <!-- Page title with icon -->
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="card p-4 shadow-sm">
+
+        <!-- Add Book Form -->
+        <div class="mb-3">
+          <label class="form-label">Titel</label>
+          <input formControlName="title" class="form-control" type="text" placeholder="Titel" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Författare</label>
+          <input formControlName="author" class="form-control" type="text" placeholder="Författare" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Publiceringsdatum</label>
+          <input formControlName="publishedDate" class="form-control" type="date" />
+        </div>
+
+        <!-- Submit Button -->
+        <button class="btn btn-success w-100" type="submit">
+          <fa-icon [icon]="faPlus"></fa-icon> Skapa bok
+        </button>
+
+        <!-- Back Link -->
+        <div class="text-center mt-3">
+          <a routerLink="/books">Tillbaka till listan</a>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+

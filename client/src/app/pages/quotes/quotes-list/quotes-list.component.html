@@ -1,0 +1,54 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+
+      <!-- Header -->
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+        <h2 class="mb-3 mb-md-0">Mina citat</h2>
+
+        <!-- Add button -->
+        <a routerLink="/quotes/add" class="btn btn-success">
+          <fa-icon [icon]="faPlus" class="me-1"></fa-icon>
+          Lägg till nytt citat
+        </a>
+      </div>
+
+      <!-- If no quotes -->
+      <div *ngIf="quotes.length === 0" class="alert alert-info">
+        Du har inga citat ännu.
+      </div>
+
+      <!-- Quote cards -->
+      <div class="row g-3">
+        <div class="col-12" *ngFor="let q of quotes">
+
+          <div class="card shadow-sm p-3 d-flex flex-row justify-content-between align-items-center">
+
+            <!-- Quote text -->
+            <div class="flex-grow-1">
+              <p class="mb-0">{{ q.text }}</p>
+            </div>
+
+            <!-- Actions -->
+            <div class="ms-3">
+              <!-- Edit -->
+              <a [routerLink]="['/quotes/edit', q.id]" class="btn btn-sm btn-primary me-2">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </a>
+
+              <!-- Delete -->
+              <button class="btn btn-sm btn-danger" (click)="deleteQuote(q.id)">
+                <fa-icon [icon]="faDelete"></fa-icon>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
