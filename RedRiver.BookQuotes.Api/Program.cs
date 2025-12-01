@@ -15,13 +15,17 @@ namespace RedRiver.BookQuotes.Api
 
             // Add services to the container.
 
-            // Validate JWT settings early (prevents silent startup with invalid auth)
+            // --------------------------
+            // Load / validate JWT config
+            // --------------------------
             var jwtKey = builder.Configuration["Jwt:Key"];
             if (string.IsNullOrWhiteSpace(jwtKey))
                 throw new Exception("JWT key is missing from configuration.");
 
-            builder.Services
-                .AddControllers()
+            // --------------------------
+            // Controllers + Validation
+            // --------------------------
+            builder.Services.AddControllers()
                 .ConfigureApiBehaviorOptions(options =>
                 {
                     // Ensures ASP.NET Core automatically returns 400 BadRequest
@@ -29,24 +33,40 @@ namespace RedRiver.BookQuotes.Api
                     options.SuppressModelStateInvalidFilter = false;
                 });
 
+            // --------------------------
+            // OpenAPI (Swagger)
+            // --------------------------
             builder.Services.AddOpenApi();
 
+            // --------------------------
+            // CORS — allow Angular app
+            // --------------------------
             // Add CORS so Angular can call the API
+            var allowedOrigins = builder.Configuration
+                .GetSection("AllowedOrigins")
+                .Get<string[]>();
+
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AngularPolicy", policy =>
                 {
-                    policy.WithOrigins("http://localhost:4200")   // Allow Angular dev server
+                    policy.WithOrigins(allowedOrigins!)           // Load allowed frontend URLs from configuration
                           .AllowAnyHeader()                       // Allow all headers
                           .AllowAnyMethod()                       // Allow GET, POST, PUT, DELETE
                           .AllowCredentials();                    // Allow cookies/tokens if needed
                 });
             });
 
+            // --------------------------
+            // Database
+            // --------------------------
             // This adds the database context and connects it to the SQL Server database
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            // --------------------------
+            // JWT Authentication
+            // --------------------------
             // Adds authentication and checks JWT tokens
             // Validates issuer, audience, lifetime, and signature
             // Uses strict token expiration
@@ -76,14 +96,18 @@ namespace RedRiver.BookQuotes.Api
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // --------------------------
+            // Pipeline configuration
+            // --------------------------
+
+            // Always redirect to HTTPS on Azure
+            app.UseHttpsRedirection();
+
+            // Enable OpenAPI + Swagger only in Development
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
             }
-
-            // Disable HTTPS redirection for local proxy use
-            //app.UseHttpsRedirection();
 
             // Enable CORS before authentication
             app.UseCors("AngularPolicy"); // Note: Must run before UseAuthentication and UseAuthorization!
