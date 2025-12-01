@@ -43,13 +43,6 @@ jobs:
           app_location: "/client" # App source code path
           api_location: "" # Api source code path - optional
           output_location: "dist/client" # Built app content directory - optional
-          app_build_command: |
-              npm install
-              npm install -g n
-              n 20.19.0
-              node -v
-              npm -v
-              npm run build
           github_id_token: ${{ steps.idtoken.outputs.result }}
           ###### End of Repository/Build Configurations ######
 
@@ -63,3 +56,4 @@ jobs:
         uses: Azure/static-web-apps-deploy@v1
         with:
           action: "close"
+
