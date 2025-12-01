@@ -1,8 +1,9 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using RedRiver.BookQuotes.Api.Data;
 using RedRiver.BookQuotes.Api.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 namespace RedRiver.BookQuotes.Api
@@ -34,9 +35,16 @@ namespace RedRiver.BookQuotes.Api
                 });
 
             // --------------------------
-            // OpenAPI (Swagger)
+            // OpenAPI (Swashbuckle)
             // --------------------------
-            builder.Services.AddOpenApi();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "RedRiver BookQuotes API",
+                    Version = "v1"
+                });
+            });
 
             // --------------------------
             // CORS — allow Angular app
@@ -103,11 +111,14 @@ namespace RedRiver.BookQuotes.Api
             // Always redirect to HTTPS on Azure
             app.UseHttpsRedirection();
 
-            // Enable OpenAPI + Swagger only in Development
-            if (app.Environment.IsDevelopment())
+            app.UseRouting(); // Important for Azure routing
+
+            // Swagger in all environments
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
             {
-                app.MapOpenApi();
-            }
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookQuotes API v1");
+            });
 
             // Enable CORS before authentication
             app.UseCors("AngularPolicy"); // Note: Must run before UseAuthentication and UseAuthorization!
