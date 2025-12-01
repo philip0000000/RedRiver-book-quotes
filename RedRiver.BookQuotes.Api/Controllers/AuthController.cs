@@ -58,7 +58,21 @@ namespace RedRiver.BookQuotes.Api.Controllers
             _db.Users.Add(user);
             await _db.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(Register), new { id = user.Id }, null); // Return a 201 status
+            // After saving the user in the database, insert default quotes
+            var defaultQuotes = new List<Quote>
+            {
+                new Quote { Text = "Det enda vi har att frukta är fruktan själv.", UserId = user.Id },
+                new Quote { Text = "Jag tänker, alltså finns jag.", UserId = user.Id },
+                new Quote { Text = "Var den förändringen du vill se i världen.", UserId = user.Id },
+                new Quote { Text = "Det enda som krävs för att ondskan ska segra är att goda människor inte gör något.", UserId = user.Id },
+                new Quote { Text = "En resa på tusen mil börjar med ett enda steg.", UserId = user.Id }
+            };
+
+            // Save quotes
+            _db.Quotes.AddRange(defaultQuotes);
+            await _db.SaveChangesAsync();
+
+            return StatusCode(201);
         }
 
         /// <summary>

@@ -4,7 +4,9 @@ import { RegisterComponent } from './pages/register/register.component';
 import { BookListComponent } from './pages/books/book-list/book-list.component';
 import { BookAddComponent } from './pages/books/book-add/book-add.component';
 import { BookEditComponent } from './pages/books/book-edit/book-edit.component';
-import { QuotesComponent } from './pages/quotes/quotes.component';
+import { QuotesListComponent } from './pages/quotes/quotes-list/quotes-list.component';
+import { QuoteAddComponent } from './pages/quotes/quote-add/quote-add.component';
+import { QuoteEditComponent } from './pages/quotes/quote-edit/quote-edit.component';
 
 export const routes: Routes = [
   // Login
@@ -19,7 +21,9 @@ export const routes: Routes = [
   { path: 'books/edit/:id', component: BookEditComponent },
 
   // Quotes
-  { path: 'quotes', component: QuotesComponent },
+  { path: 'quotes', component: QuotesListComponent },
+  { path: 'quotes/add', component: QuoteAddComponent },
+  { path: 'quotes/edit/:id', component: QuoteEditComponent },
 
   // Default route
   { path: '', redirectTo: 'books', pathMatch: 'full' },
