@@ -1,5 +1,28 @@
-# RedRiver-book-quotes
-Fullstack test project (.NET 9 + Angular 20) for RedRiver Consulting
+﻿# RedRiver-book-quotes
+A full-stack CRUD application built with .NET 9 Web API and Angular 20.
+
+## Preview
+
+![Application Screenshot](docs/assets/screenshot-app.png)
+
+## Project Information
+
+**Author:** [philip0000000](https://github.com/philip0000000)  
+**Completion Date:** 2025-12-02  
+**Deployment:** Successfully deployed to Azure Static Web Apps  
+**Live Application:** https://gray-beach-0b9960303.3.azurestaticapps.net/books
+
+## Testing & Compatibility
+
+The application has been tested on:
+
+- Desktop (Windows 10, Chrome & Firefox)
+- Smartphone (Android, Chrome)
+
+Tablet testing is planned and tracked in this issue:  
+[Request: Tablet layout testing](https://github.com/philip0000000/RedRiver-book-quotes/issues/66)
+
+## Project Overview
 
 The goal is to create a responsive CRUD web application using Angular 20 for the front end and .NET 9 C# for the back-end API. In addition to this, this must be implemented: token-based authentication for user verification, use Bootstrap and Font Awesome icons for styling, and add a "Mina citat" ("My Quotes" in Swedish) page where users can add and view their favorite quotes.
 
