@@ -66,15 +66,15 @@ Responsive Design Testing
 ## Running the application locally
 
 ### Backend (.NET 9 API)
-cd RedRiver.BookQuotes.Api
-dotnet restore
-dotnet ef database update
-dotnet run
+cd RedRiver.BookQuotes.Api<br>
+dotnet restore<br>
+dotnet ef database update<br>
+dotnet run<br>
 
 ### Frontend (Angular 20)
-cd client
-npm install
-ng serve -o
+cd client<br>
+npm install<br>
+ng serve -o<br>
 
 ## API Endpoints
 
