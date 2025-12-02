@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+//import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'   // Service is available everywhere
@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment';
 
 export class AuthService {
 
-  private apiUrl = `${environment.apiUrl}/auth`;
+  private apiUrl = `${(window as any).environment.apiUrl}/auth`;
 
   constructor(private http: HttpClient) {}
 
