@@ -63,6 +63,19 @@ Responsive Design Testing
  - Verify that form fields, buttons, and other UI elements maintain proper spacing and alignment across different viewports.
  - Test the application on multiple devices (e.g., smartphones, tablets) and browsers to ensure consistent behavior.
 
+## Running the application locally
+
+### Backend (.NET 9 API)
+cd RedRiver.BookQuotes.Api
+dotnet restore
+dotnet ef database update
+dotnet run
+
+### Frontend (Angular 20)
+cd client
+npm install
+ng serve -o
+
 ## API Endpoints
 
 ### POST /auth/register
