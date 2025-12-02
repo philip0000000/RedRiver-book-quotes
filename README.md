@@ -3,7 +3,7 @@ A full-stack CRUD application built with .NET 9 Web API and Angular 20.
 
 ## Preview
 
-![Application Screenshot](docs/assets/screenshot-app.png)
+![Application Screenshot](docs/assets/screenshot-app.jpg)
 
 ## Project Information
 
