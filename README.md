@@ -10,7 +10,7 @@ A full-stack CRUD application built with .NET 9 Web API and Angular 20.
 **Author:** [philip0000000](https://github.com/philip0000000)  
 **Completion Date:** 2025-12-02  
 **Deployment:** Successfully deployed to Azure Static Web Apps  
-**Live Application:** https://gray-beach-0b9960303.3.azurestaticapps.net/books
+**Live Application:** https://gray-beach-0b9960303.3.azurestaticapps.net/
 
 ## Testing & Compatibility
 
