@@ -12,11 +12,21 @@
         <div class="mb-3">
           <label class="form-label">Användarnamn</label>
           <input formControlName="username" class="form-control" type="text" placeholder="Välj användarnamn">
+
+          <small class="text-danger"
+                 *ngIf="form.get('username')?.touched && form.get('username')?.errors?.['minlength']">
+            Användarnamnet måste vara minst 3 tecken långt.
+          </small>
         </div>
 
         <div class="mb-3">
           <label class="form-label">Lösenord</label>
           <input formControlName="password" class="form-control" type="password" placeholder="Välj lösenord">
+
+          <small class="text-danger"
+                 *ngIf="form.get('password')?.touched && form.get('password')?.errors?.['minlength']">
+            Lösenordet måste vara minst 6 tecken långt.
+          </small>
         </div>
 
         <!-- Submit button -->
