@@ -22,6 +22,20 @@ jobs:
         with:
           submodules: true
           lfs: false
+      # new
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.19.0
+      # new
+      - name: Install dependencies
+        working-directory: client
+        run: npm ci
+      # new
+      - name: Build Angular
+        working-directory: client
+        run: npm run build
+      # end of new
       - name: Install OIDC Client from Core Package
         run: npm install @actions/core@1.6.0 @actions/http-client
       - name: Get Id Token
@@ -38,6 +52,8 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GRAY_BEACH_0B9960303 }}
           action: "upload"
+          # new
+          skip_app_build: true
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "./client" # App source code path
@@ -56,3 +72,4 @@ jobs:
         uses: Azure/static-web-apps-deploy@v1
         with:
           action: "close"
+
